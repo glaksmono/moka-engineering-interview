@@ -1,0 +1,53 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+body {
+ padding-top: 60px;
+}
+
+section {
+ overflow: auto;
+}
+
+textarea {
+ resize: vertical;
+}
+
+.center {
+ text-align: center;
+}
+
+.center h1 {
+ margin-bottom: 10px;
+}
+
+h2.header-main {
+ color: #ffffff;
+ float: left;
+}
+
+.navbar {
+ padding-left: 50px;
+}
+
+input#login-button {
+ margin-top: 10px;
+}
+
+p#new-user-text {
+ margin-top: 20px;
+}
+
+div.container {
+  padding-top: 50px;
+}
+
+h1.text-center {
+  text-align: center;
+}
