@@ -23,7 +23,8 @@ Then you will need to create a pull request against the `master`, with a title o
 ## How to Setup
 
 1. `bundle install`
-2. `bundle exec rake db:setup`
+2. `rake db:migrate`
+2. `rake db:seed`
 3. `rails s`
 
 ## Credentials
