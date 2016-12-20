@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Moka Rails Interview</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Moka Rails Interview</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= render 'layouts/header' %>
-<div class="container">
-  <%= yield %>
-</div>
-<%= render 'layouts/footer' %>
+  <%= render 'layouts/header' %>
 
-</body>
+  <div class="container">
+    <!-- flash message -->
+    <% if notice.present? %>
+      <p id="notice"><%= notice %></p>
+    <% end %>
+
+    <% if alert.present? %>
+      <p id="alert"><%= alert %></p>
+    <% end %>
+
+
+    <%= yield %>
+  </div>
+
+  <%= render 'layouts/footer' %>
+
+  </body>
 </html>
