@@ -16,12 +16,16 @@ gem 'jquery-rails', '3.0.4'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.1.2'
 
+gem 'sprockets', '~> 3.6.3'
+
 group :development, :test do
   # Debugger
   gem 'byebug', '3.5.1'
   gem 'pry-nav', '0.2.4'
   gem 'pry-rails', '0.3.3'
   gem 'pry-rescue', '1.4.2'
+  gem 'rspec-rails', "~> 3.5"
+  gem 'factory_girl_rails', require: false
 end
 
 group :development do
@@ -30,4 +34,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do 
+  gem 'faker'
+  gem "database_cleaner"
 end

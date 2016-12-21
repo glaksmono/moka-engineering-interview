@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       # Redirect user to login page after signup
-      redirect_to root_url
+      redirect_to login_path, :notice => "Registration was successful."
     else
       render 'new'
     end
