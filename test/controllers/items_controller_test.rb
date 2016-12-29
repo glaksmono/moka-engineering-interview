@@ -2,10 +2,12 @@ require 'test_helper'
 
 class ItemsControllerTest < ActionController::TestCase
   setup do
-    @item = Item.create!(name: "Green Tea Latte", price: 35_000)
-    @item_hash = { name: "Double shot", price: 40_000 }
     @user = User.create!(email: "test@test.com", password: "testpassword",
                          first_name: "Test", last_name: "Test")
+    @business = Business.create!(name: "Test Business", address: "Test Address",
+                                 city: "Jakarta", user: @user)
+    @item = Item.create!(name: "Green Tea Latte", price: 35_000, business: @business)
+    @item_hash = { name: "Double shot", price: 40_000 }
     session[:user_id] = @user.id
   end
 

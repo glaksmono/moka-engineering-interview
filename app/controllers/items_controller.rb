@@ -12,11 +12,11 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item = current_business.items.new
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = current_business.items.new(item_params)
     if @item.save
       redirect_to @item, notice: 'item was successfully created.'
     else
@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
 
   private
   def set_item
-    @item = Item.find(params[:id])
+    @item = current_business.items.find(params[:id])
   end
 
   def item_params

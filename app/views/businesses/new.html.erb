@@ -1,0 +1,14 @@
+<h1>Create your business</h1>
+
+<%= form_for @business, url: businesses_path, html: {class: "horizontal_form"} do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+
+  <%= f.submit "Create" %>
+<% end %>
