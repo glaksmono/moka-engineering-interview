@@ -11,6 +11,12 @@ class UsersControllerTest < ActionController::TestCase
     }
   end
 
+  test 'should get new' do
+    get :new
+    assert_response :success
+    assert_template :new
+  end
+
   test 'should create user' do
     assert_difference('User.count') do
       post :create, user: @user_hash

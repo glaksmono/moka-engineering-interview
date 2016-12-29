@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_filter :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
     # List all of the Items that are owned by the logged in User's Business
