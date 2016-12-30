@@ -7,7 +7,7 @@ class HomeControllerTest < ActionController::TestCase
   end
 
   test 'should redirected to items' do
-    login
+    login(@user)
 
     get :index
     assert_redirected_to items_path

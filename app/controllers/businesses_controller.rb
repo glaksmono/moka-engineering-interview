@@ -1,6 +1,11 @@
 class BusinessesController < ApplicationController
   def new
-    @business = current_user.build_business
+    if current_user.business.present?
+      redirect_to root_path
+    else
+      @business = current_user.build_business
+      render :new
+    end
   end
 
   def create
@@ -14,7 +19,6 @@ class BusinessesController < ApplicationController
 
   private
   def business_params
-    params.require(:business).permit(:name, :address,
-                                     :city)
+    params.require(:business).permit(:name, :address, :city)
   end
 end

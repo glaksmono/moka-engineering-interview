@@ -18,7 +18,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'should get index' do
     create_business
-    login
+    login(@user)
 
     get :index
     assert_response :success
@@ -26,7 +26,7 @@ class ItemsControllerTest < ActionController::TestCase
   end
 
   test 'should create business when not have it yet' do
-    login
+    login(@user)
 
     get :index
     assert_redirected_to new_business_path
@@ -34,7 +34,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'should get new' do
     create_business
-    login
+    login(@user)
 
     get :new
     assert_response :success
@@ -43,7 +43,7 @@ class ItemsControllerTest < ActionController::TestCase
 
   test 'should create item' do
     create_business
-    login
+    login(@user)
 
     assert_difference('Item.count') do
       post :create, item: @item_hash
@@ -55,16 +55,17 @@ class ItemsControllerTest < ActionController::TestCase
   test 'should show item' do
     create_business
     create_item
-    login
+    login(@user)
 
     get :show, id: @item
     assert_response :success
+    assert_template :show
   end
 
   test 'should get edit' do
     create_business
     create_item
-    login
+    login(@user)
 
     get :edit, id: @item
     assert_response :success
@@ -73,7 +74,7 @@ class ItemsControllerTest < ActionController::TestCase
   test 'should update item' do
     create_business
     create_item
-    login
+    login(@user)
 
     patch :update, id: @item, item: @item_hash
     assert_redirected_to item_path(assigns(:item))
@@ -84,7 +85,7 @@ class ItemsControllerTest < ActionController::TestCase
   test 'should destroy item' do
     create_business
     create_item
-    login
+    login(@user)
 
     assert_difference('Item.count', -1) do
       delete :destroy, id: @item

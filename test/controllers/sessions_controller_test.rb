@@ -26,7 +26,7 @@ class SessionsControllerTest < ActionController::TestCase
   end
 
   test 'should logout' do
-    login
+    login(@user)
 
     delete :destroy
 
