@@ -1,0 +1,27 @@
+<%= form_for @item, html: { class: 'form-horizontal' } do |f| %>
+  <%= f.hidden_field :business_id %>
+
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-1" %>
+    <div class="col-sm-6">
+      <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :price, class: "col-sm-1" %>
+    <div class="col-sm-6">
+      <%= f.text_field :price, class: 'form-control', placeholder: 'Price' %>
+    </div>
+  </div>
+
+  <div class="form-group form-action">
+    <div class="col-sm-3">
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
+    </div>
+    <div class="col-sm-3">
+      <%= link_to 'Cancel', 'javascript:history.back()', class: 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
