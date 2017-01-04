@@ -1,0 +1,47 @@
+<% provide(:title, 'Edit Profile') %>
+<h1 class="text-center">Edit Profile</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3" id="signup-form">
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "invalid value") %>.</h2>
+
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+    
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: 'Fill For Change' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.fields_for :business, Business.new(user_id: @user) do |bs| %>
+        <h3>My Business</h3>
+        <%= bs.label :name %>
+        <%= bs.text_field :name %>
+
+        <%= bs.label :address %>
+        <%= bs.text_area :address %>
+
+        <%= bs.label :city %>
+        <%= bs.text_field :city %>
+      <% end %>
+
+      <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
