@@ -16,6 +16,7 @@ gem 'jquery-rails', '3.0.4'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.1.2'
+gem 'bootstrap', '~> 4.0.0.alpha5'
 
 group :development, :test do
   # Debugger
@@ -23,6 +24,11 @@ group :development, :test do
   gem 'pry-nav', '0.2.4'
   gem 'pry-rails', '0.3.3'
   gem 'pry-rescue', '1.4.2'
+end
+
+group :test do
+  gem 'shoulda', '~> 3.5'
+  gem 'shoulda-matchers', '~> 2.0'
 end
 
 group :development do
