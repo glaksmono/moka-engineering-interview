@@ -29,7 +29,20 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
+
+       <hr/> 
+      <%= f.fields_for :business, Business.new(user_id: @user) do |bus| %>
+        <%= bus.label 'Business Name' %>
+        <%= bus.text_field :name %>
+
+        <%= bus.label 'Business Address' %>
+        <%= bus.text_area :address %>
+
+        <%= bus.label 'Business City' %>
+        <%= bus.text_field :city %>
+      <% end %>
+
+      <%= f.submit "Create My Account", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
