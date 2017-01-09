@@ -10,8 +10,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def new
+    @item = Item.new business_id: current_business.id
+  end
+
   def create
-    # TODO: [MOKA-001] Finish the implementation of Create/Update/Delete for Items
+    @item = Item.new item
+    if @item.save
+      redirect_to items_path, :notice => "Item '#{@item.name}' has been created successfully!"
+    else
+      redirect_to items_path, :alert => "Unable to create item '#{item.name}'. Error : '#{item.errors.full_messages}'"
+      render :new
+    end
   end
 
   def Update
@@ -21,4 +31,9 @@ class ItemsController < ApplicationController
   def destroy
     # TODO: [MOKA-001] Finish the implementation of Create/Update/Delete for Items
   end
+
+   private
+    def item
+      params.require(:item).permit(:name, :price, :business_id)
+    end
 end

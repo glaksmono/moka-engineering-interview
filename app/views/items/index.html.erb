@@ -2,11 +2,11 @@
 
 <h1>Listing items</h1>
 
-<table class="item-list">
+<table class="item-list table table-hover">
   <tr>
-    <th>Item name</th>
+    <th>Item Name</th>
     <th>Price</th>
-    <th><button name="add">Add</button></th>
+    <th><%= link_to 'Add New Item', new_item_path, class: "btn btn-primary" %></th>
   </tr>
 
   <% @items.each do |item| %>
