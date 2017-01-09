@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+   skip_before_filter :authenticate_item, :only => [:new, :create]
    before_action :prepare_item, only: [:edit, :update, :destroy]
 
   def index
@@ -20,8 +21,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to items_path, :notice => "Item '#{@item.name}' has been created successfully!"
     else
-      redirect_to items_path, :alert => "Unable to create item '#{item.name}'. Error : '#{item.errors.full_messages}'"
-      render :new
+     render :new, :alert => "Unable to create item '#{@item.name}'. Error : '#{@item.errors.full_messages}'"
     end
   end
 
@@ -31,8 +31,7 @@ class ItemsController < ApplicationController
       if @item.update item
            redirect_to items_path, :notice => "Item '#{@item.name}' has been updated successfully!"
         else
-           redirect_to items_path, :alert => "Unable to delete item '#{item.name}'. Error : '#{item.errors.full_messages}'"
-          render :edit
+            render :new, :alert => "Unable to update item '#{@item.name}'. Error : '#{@item.errors.full_messages}'"
       end
     else
       #If item doesn't exist, prompt alert

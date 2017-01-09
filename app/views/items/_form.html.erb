@@ -1,4 +1,16 @@
 <%= form_for @item, html: { class: 'form-horizontal' } do |f| %>
+   <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "invalid value") %>.</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= f.hidden_field :business_id %>
   <div class="form-body">
     <div class="row">
