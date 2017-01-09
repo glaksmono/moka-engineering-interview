@@ -15,7 +15,7 @@
       <td><%= item.price %></td>
       <td>
         <button name="edit">Edit</button>
-        <button name="delete">Delete</button>
+        <%= link_to "Delete", item,  class: "btn btn-danger" , method: :delete, data: { confirm: "Are you sure you want to delete item #{item.name}?" } %>
       </td>
     </tr>
   <% end %>
