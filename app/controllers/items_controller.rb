@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+   before_action :prepare_item, only: [:edit, :update, :destroy]
 
   def index
     # List all of the Items that are owned by the logged in User's Business
@@ -10,15 +11,57 @@ class ItemsController < ApplicationController
     end
   end
 
-  def create
-    # TODO: [MOKA-001] Finish the implementation of Create/Update/Delete for Items
+  def new
+    @item = Item.new business_id: current_business.id
   end
 
-  def Update
-    # TODO: [MOKA-001] Finish the implementation of Create/Update/Delete for Items
+  def create
+    @item = Item.new item
+    if @item.save
+      redirect_to items_path, :notice => "Item '#{@item.name}' has been created successfully!"
+    else
+      redirect_to items_path, :alert => "Unable to create item '#{item.name}'. Error : '#{item.errors.full_messages}'"
+      render :new
+    end
+  end
+
+  def update
+    if Item.where(:id => params[:id]).present?
+      #If item exist, update item
+      if @item.update item
+           redirect_to items_path, :notice => "Item '#{@item.name}' has been updated successfully!"
+        else
+           redirect_to items_path, :alert => "Unable to delete item '#{item.name}'. Error : '#{item.errors.full_messages}'"
+          render :edit
+      end
+    else
+      #If item doesn't exist, prompt alert
+      redirect_to items_path, :alert => "Item that was going to be updated is no longer exist!"
+    end
   end
 
   def destroy
-    # TODO: [MOKA-001] Finish the implementation of Create/Update/Delete for Items
+    #Check if item is still exist in DB
+    if Item.where(:id => params[:id]).present?
+      item = Item.find(params[:id])
+      #If item exist, delete the item
+      if @item.destroy
+         redirect_to items_path, :notice => "Item '#{item.name}' has been deleted successfully!"
+      else
+        redirect_to items_path, :alert => "Unable to delete item '#{item.name}'. Error : '#{item.errors.full_messages}'"
+      end
+    else
+      #If item doesn't exist, prompt alert
+      redirect_to items_path, :alert => "Item that was going to be deleted is no longer exist!"
+    end
   end
+
+   private
+    def item
+      params.require(:item).permit(:name, :price, :business_id)
+    end
+
+     def prepare_item
+      @item = Item.find_by id: params[:id]
+    end
 end
