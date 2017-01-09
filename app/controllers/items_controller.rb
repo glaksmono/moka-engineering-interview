@@ -25,8 +25,19 @@ class ItemsController < ApplicationController
     end
   end
 
-  def Update
-    # TODO: [MOKA-001] Finish the implementation of Create/Update/Delete for Items
+  def update
+    if Item.where(:id => params[:id]).present?
+      #If item exist, update item
+      if @item.update item
+           redirect_to items_path, :notice => "Item '#{@item.name}' has been updated successfully!"
+        else
+           redirect_to items_path, :alert => "Unable to delete item '#{item.name}'. Error : '#{item.errors.full_messages}'"
+          render :edit
+      end
+    else
+      #If item doesn't exist, prompt alert
+      redirect_to items_path, :alert => "Item that was going to be updated is no longer exist!"
+    end
   end
 
   def destroy
