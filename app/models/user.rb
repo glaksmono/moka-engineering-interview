@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_one :business
+  belongs_to :role
 
   accepts_nested_attributes_for :business
 
