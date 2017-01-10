@@ -1,0 +1,43 @@
+<div class="content">
+  <div class="col-sm-12">
+    <% provide(:title, "Edit Profile") %>
+
+    <h1>Edit Profile</h1>
+    
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "invalid value") %>.</h2>
+
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: 'Enter To Change New Password' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+
+      <div class="row">
+       <div class="col-sm-2">
+       <%= f.submit "Save My Profile", class: "btn btn-primary" %>
+       </div>
+      </div>
+    <% end %>
+  </div>
+</div>
