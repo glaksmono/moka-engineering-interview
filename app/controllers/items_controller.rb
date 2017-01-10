@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
    skip_before_filter :authenticate_item, :only => [:new, :create]
    before_action :prepare_item, only: [:edit, :update, :destroy]
-
+   load_and_authorize_resource
+   
   def index
     # List all of the Items that are owned by the logged in User's Business
     if current_business.present?

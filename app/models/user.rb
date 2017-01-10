@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
+
+  before_save :assign_role
+
   has_secure_password
 
   has_one :business
@@ -15,4 +18,20 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 } 
+
+  def admin?
+    self.role.name == "Admin"
+  end
+
+  def seller?
+    self.role.name == "Seller"
+  end
+
+  def regular?
+    self.role.name == "Regular"
+  end
+
+  def assign_role
+    self.role = Role.find_by name: "Regular" if self.role.nil?
+  end
 end

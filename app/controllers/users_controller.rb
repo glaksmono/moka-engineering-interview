@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authenticate_user, :only => [:new, :create]
   before_action :prepare_user, only: [:edit]
-
   def show
      @user = User.find(params[:id])
   end

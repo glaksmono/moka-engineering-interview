@@ -1,6 +1,8 @@
 class BusinessesController < ApplicationController
 	skip_before_filter :authenticate_business, :only => [:new, :create]
 	before_action :prepare_item, only: [:edit, :update]
+	#add cancancan load_and_authorise_resource to auth in all method
+   	load_and_authorize_resource
 
 	def new
 		@business = Business.new user_id: current_user.id

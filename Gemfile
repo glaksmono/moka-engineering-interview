@@ -17,6 +17,9 @@ gem 'jquery-rails', '3.0.4'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.1.2'
 
+# Use cancancan Authorisation
+gem 'cancancan', '~> 1.15'
+
 group :development, :test do
   # Debugger
   gem 'byebug', '3.5.1'
