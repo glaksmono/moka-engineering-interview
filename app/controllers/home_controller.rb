@@ -7,9 +7,4 @@ class HomeController < ApplicationController
       redirect_to login_path
     end
   end
-
-  def signup
-    @user = User.new
-    # TODO: [MOKA-002] Finish the implementation of User registration
-  end
 end

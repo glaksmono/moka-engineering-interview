@@ -1,0 +1,13 @@
+<h1>Show item</h1>
+
+<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd><%= @item.name %></dd>
+</dl>
+
+<dl class="dl-horizontal">
+  <dt>Price</dt>
+  <dd><%= @item.price %></dd>
+</dl>
+
+<%= link_to "Back", items_path, class: "btn btn-default" %>
