@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
   private
   def user
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, business_attributes: [:name, :address, :city])  
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role_id, business_attributes: [:name, :address, :city])  
   end
 
   def prepare_user

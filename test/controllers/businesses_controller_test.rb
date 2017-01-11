@@ -6,11 +6,17 @@ class BusinessesControllerTest < ActionController::TestCase
   # end
 
   setup do
+    @role = Role.create!(
+      name: "Admin", 
+      description: "Can perform any CRUD operation on any resource"
+      )
+
   	@user = User.create!(
       first_name: "Test ",
   		last_name:"User", 
   		email: "test@example.com",
   		password:"password",
+      role: @role,
   		password_confirmation:"password")
   
   	@business = {
@@ -20,7 +26,7 @@ class BusinessesControllerTest < ActionController::TestCase
   end
 
   def create
-  	@business = Business.create!(name: "Business Test ",
+    @business = Business.create!(name: "Business Test ",
   		address:"Biz address test", 
   		city: "Biz City Test", user: @user)
   end

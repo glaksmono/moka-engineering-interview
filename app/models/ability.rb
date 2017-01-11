@@ -9,6 +9,7 @@ class Ability
         can :manage, :all
       elsif user.seller? 
         can :manage, @item
+        can :read, :all
       else
         can :read, :all
       end

@@ -6,11 +6,17 @@ class ItemsControllerTest < ActionController::TestCase
   # end
 
   setup do
+    @role = Role.create!(
+      name: "Admin", 
+      description: "Can perform any CRUD operation on any resource"
+      )
+    
   	@user = User.create!(
   		first_name: "Test ",
   		last_name:"User", 
   		email: "test@example.com",
   		password:"password",
+      role: @role,
   		password_confirmation:"password")
 
   	@item_hash = {
