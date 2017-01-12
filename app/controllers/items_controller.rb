@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
     @item.business_id = current_business.id
 
     if @item.save
-      redirect_to @item, notice: 'Item was successfully created.'
+      redirect_to "/items", notice: 'Item was successfully created.'
     else
       render :new
     end
@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   def update
     if @item.update(item_params)
-      redirect_to @item, notice: 'Item was successfully updated.'
+      redirect_to "/items", notice: 'Item was successfully updated.'
     else
       render :edit
     end

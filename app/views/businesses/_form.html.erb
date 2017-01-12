@@ -1,0 +1,6 @@
+<%= form_for(@business) do |f| %>
+  Name: <%= f.text_field :name %><br />
+  Address: <%= f.text_area :address %><br />
+  City : <%= f.text_field :city %><br />
+  <%= f.submit %>
+<% end %>
