@@ -1,0 +1,5 @@
+<%= form_for(@item) do |i| %>
+  Name: <%= i.text_field :name %><br />
+  Price : <%= i.text_field :price %><br />
+  <%= i.submit %>
+<% end %>
