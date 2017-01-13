@@ -6,8 +6,8 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  def login
-    session[:user_id] = @user.id
-  end
+end
 
+class ActionController::TestCase
+  include Devise::TestHelpers
 end

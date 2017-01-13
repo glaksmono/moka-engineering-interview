@@ -1,12 +1,8 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
-  def setup
-  	@item = Item.new(name: "Test Item", price:"10000")
+  setup do
+  	@item = items(:itemadminuser)
   end
 
   test "should be valid" do

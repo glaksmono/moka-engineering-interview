@@ -1,15 +1,13 @@
 class BusinessesController < ApplicationController
-	skip_before_filter :authenticate_business, :only => [:new, :create]
 	before_action :prepare_item, only: [:edit, :update]
-	#add cancancan load_and_authorise_resource to auth in all method
-   	load_and_authorize_resource :users,:items, :business
+	load_and_authorize_resource
+	
 
 	def new
 		@business = Business.new user_id: current_user.id
 	end
 
 	def create
-		@business = Business.new business
 		if @business.save
 			redirect_to items_path, :notice => "Business '#{@business.name}' has been created successfully!"
 		else
@@ -20,7 +18,7 @@ class BusinessesController < ApplicationController
 	def update
 		if Business.where(:id => params[:id]).present?
 		      #If Business exist, business item
-		      if @business.update business
+		      if @business.update business_params
 		      	redirect_to items_path, :notice => "Business '#{@business.name}' has been updated successfully!"
 		      else
 		      	render :new, :alert => "Unable to update business '#{@business.name}'. Error : '#{@business.errors.full_messages}'"
@@ -32,7 +30,7 @@ class BusinessesController < ApplicationController
 	end
 
 	private
-	def business
+	def business_params
 		params.require(:business).permit(:name, :address, :city, :user_id)  
 	end
 

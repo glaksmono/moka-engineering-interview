@@ -1,114 +1,121 @@
 require 'test_helper'
 
 class ItemsControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
   setup do
-    @role = Role.create!(
-      name: "Admin", 
-      description: "Can perform any CRUD operation on any resource"
-      )
-    
-  	@user = User.create!(
-  		first_name: "Test ",
-  		last_name:"User", 
-  		email: "test@example.com",
-  		password:"password",
-      role: @role,
-  		password_confirmation:"password")
+    @item_admin_user = items(:itemadminuser)
+    @item_hash = {
+      name: "Updated Test Item",
+      price: 20000, 
+      business: @business}
+  end
 
-  	@item_hash = {
-  		name: "Updated Test Item",
-  		price: 20000, 
-  		business: @business}
-  	end
+  test "should denied get index without login" do
+    get :index
+    assert_redirected_to new_user_session_path
+    assert_response :redirect
+  end 
 
-  	def create_business
-  		@business = Business.create!(
-  			name: "Business Test ",
-  			address:"Biz address test", 
-  			city: "Biz City Test", 
-  			user: @user)
-  	end
+  test "should get index" do
+    sign_in users(:adminuser)
+    get :index
+    assert_response :success
+    assert_template :index
+  end 
 
-  	def create_item
-  		@item = Item.create!(
-  			name: "Test Item",
-  			price: 10000, 
-  			business: @business)
-  	end
+	test 'should redirect to create business if user has no business' do
+  	sign_in users(:nobusiness)
+		get:index
 
-  	test 'should get index' do
-  		create_business
-  		login
+		assert_redirected_to new_business_path
+		assert_response :redirect
+	end
 
-  		get :index
-  		assert_template :index
-  		assert_response :success
-  	end  
+	test 'should get new' do
+		sign_in users(:adminuser)
 
-  	test 'should redirect to create business if business doesnt exists' do
-  		login
-  		get:index
+		get:new
+		assert_template :new
+		assert_response :success
+	end
 
-  		assert_redirected_to new_business_path
-  		assert_response :redirect
-  	end
+  test 'should denied get new for regular user' do
+    sign_in users(:regularuser)
 
-  	test 'should redirect to new' do
-  		create_business
-  		login
+    get:new
+    assert_response :redirect
+    assert_redirected_to root_path
+  end
 
-  		get:new
-  		assert_template :new
-  		assert_response :success
-  	end
+	test 'should create item' do
+		sign_in users(:adminuser)
 
-  	test 'should create item' do
-  		create_business
-  		login
+		assert_difference('Item.count') do
+			post :create, item: {name: @item_admin_user.name, price: @item_admin_user.price, business_id: @item_admin_user.business_id}
+	  end
 
-  		assert_difference('Item.count') do
-  			post :create, item: @item_hash
-  		end
+    assert_redirected_to items_path
+    assert_response :redirect
+  end
 
-  		assert_redirected_to items_path
-  		assert_response :redirect
-  	end
+  test 'should denied create item that is not belong to his business' do
+    sign_in users(:selleruser)
 
-    test 'should get edit' do
-      create_business
-      create_item
-      login
-
-      get :edit, id: @item
-      assert_response :success
+    assert_difference('Item.count') do
+      post :create, item: {name: @item_admin_user.name, price: @item_admin_user.price, business_id: @item_admin_user.business_id}
     end
 
-    test 'should update item' do
-      create_business
-      create_item
-      login
+    assert_response :redirect
+    assert_redirected_to items_path
+  end
 
-      patch :update, id: @item, item: @item_hash
-      assert_redirected_to items_path
-      assert_response :redirect
-      assert_equal 'Updated Test Item', assigns(:item).name
-      assert_equal 20000, assigns(:item).price
+  test 'should get edit' do
+    sign_in users(:adminuser)
+   
+    get :edit, id: @item_admin_user
+    assert_response :success
+    assert_template :edit
+  end
+
+  test 'should denied edit that is not belong to his business' do
+    sign_in users(:selleruser)
+   
+    get :edit, id: @item_admin_user
+    assert_response :redirect
+    assert_redirected_to root_path
+  end
+
+  test 'should update item' do
+    sign_in users(:adminuser)
+
+    patch :update, id: @item_admin_user, item: @item_hash
+    assert_redirected_to items_path
+    assert_response :redirect
+    assert_equal 'Updated Test Item', assigns(:item).name
+    assert_equal 20000, assigns(:item).price
+  end
+
+  test 'should denied update that is not belong to his business' do
+    sign_in users(:selleruser)
+   
+    patch :update, id: @item_admin_user, item: @item_hash
+    assert_response :redirect
+    assert_redirected_to root_path
+  end
+
+  test 'should destroy item' do
+    sign_in users(:adminuser)
+
+    assert_difference('Item.count', -1) do
+      delete :destroy, id: @item_admin_user
     end
+    assert_redirected_to items_path
+    assert_response :redirect
+  end  
 
-    test 'should destroy item' do
-      create_business
-      create_item
-      login
-
-      assert_difference('Item.count', -1) do
-        delete :destroy, id: @item
-      end
-
-      assert_redirected_to items_path
-      assert_response :redirect
-    end
+  test 'should denied destroy that is not belong to his business' do
+    sign_in users(:selleruser)
+    delete :destroy, id: @item_admin_user
+    assert_response :redirect
+    assert_redirected_to root_path
+  end
 end

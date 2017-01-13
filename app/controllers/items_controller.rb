@@ -1,16 +1,15 @@
 class ItemsController < ApplicationController
-   skip_before_filter :authenticate_item, :only => [:new, :create]
-   before_action :prepare_item, only: [:edit, :update, :destroy]
-   load_and_authorize_resource  :users, :business, :items
-   
+  before_action :prepare_item, only: [:edit, :update]
+  load_and_authorize_resource
+
   def index
     # List all of the Items that are owned by the logged in User's Business
-    if current_business.present?
-      @items = current_business.items
-    else
-    # If business not yet created, redirect to create a new business
-      redirect_to new_business_path, notice: "Please create a business."
-    end
+      if current_business.present?
+        @items = current_business.items
+      else
+      # If business not yet created, redirect to create a new business
+        redirect_to new_business_path, notice: "Please create a business."
+      end
   end
 
   def new
@@ -18,7 +17,6 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new item
     if @item.save
       redirect_to items_path, :notice => "Item '#{@item.name}' has been created successfully!"
     else
@@ -29,7 +27,7 @@ class ItemsController < ApplicationController
   def update
     if Item.where(:id => params[:id]).present?
       #If item exist, update item
-      if @item.update item
+      if @item.update item_params
            redirect_to items_path, :notice => "Item '#{@item.name}' has been updated successfully!"
         else
             render :new, :alert => "Unable to update item '#{@item.name}'. Error : '#{@item.errors.full_messages}'"
@@ -45,7 +43,7 @@ class ItemsController < ApplicationController
     if Item.where(:id => params[:id]).present?
       item = Item.find(params[:id])
       #If item exist, delete the item
-      if @item.destroy
+      if item.destroy 
          redirect_to items_path, :notice => "Item '#{item.name}' has been deleted successfully!"
       else
         redirect_to items_path, :alert => "Unable to delete item '#{item.name}'. Error : '#{item.errors.full_messages}'"
@@ -57,7 +55,7 @@ class ItemsController < ApplicationController
   end
 
    private
-    def item
+    def item_params
       params.require(:item).permit(:name, :price, :business_id)
     end
 
