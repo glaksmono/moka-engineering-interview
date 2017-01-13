@@ -1,11 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authenticate_user, :only => [:new, :create]
 
-  # GET /users/1
-  def show
-    set_user
-  end
-
   # GET /users/new
   def new
     @user = User.new
@@ -33,9 +28,10 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    set_user
     if (user_params[:password] == user_params[:password_confirmation])
       if @user.update(user_params)
-        redirect_to @items, notice: 'User was successfully updated.'
+        redirect_to items_path, notice: 'User was successfully updated.'
       else
         render :edit
       end

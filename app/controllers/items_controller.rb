@@ -37,6 +37,7 @@ class ItemsController < ApplicationController
 
   # PATCH/PUT /items/1
   def update
+    set_item
     if @item.update(item_params)
       redirect_to "/items", notice: 'Item was successfully updated.'
     else
