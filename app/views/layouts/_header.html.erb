@@ -4,7 +4,7 @@
     <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
         <ul>
-          <% if can? :manage, Business %>
+          <% if can? :update, Business %>
             <% if current_business.blank? %>
               <li><%= link_to "Create Business", new_business_path %></li>
             <% else %>

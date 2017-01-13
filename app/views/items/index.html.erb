@@ -7,7 +7,7 @@
     <th>Item Name</th>
     <th>Price</th>
     <th>
-    <% if can? :create, @item %>
+    <% if can? :create, Item %>
       <%= link_to 'Add New Item', new_item_path, class: "btn btn-primary" %>
     <% end %>    
       </th>
@@ -18,11 +18,11 @@
       <td><%= item.name %></td>
       <td><%= item.price %></td>
       <td>
-        <% if can? :update, @item %>
+        <% if can? :update, item %>
           <%= link_to 'Edit', edit_item_path(item), class: "btn btn-info" %>
         <% end %>
         
-        <% if can? :delete, @item %>
+        <% if can? :delete, item %>
           <%= link_to "Delete", item,  class: "btn btn-danger" , method: :delete, data: { confirm: "Are you sure you want to delete item #{item.name}?" } %>
         <% end %>
       </td>
