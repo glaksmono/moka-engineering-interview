@@ -38,4 +38,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  #Added default_url to localhost for development for devise authentication.
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 end

@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
 
+  devise_for :users, :controllers => { registrations: 'registrations' }
   resources :users
   resources :items
   resources :businesses
 
-  get    '/signup',       to: 'users#new'
+  # Below are no longer required after implementing devise 
+  #get    '/signup',       to: 'users#new'ite
+  # get    '/login',        to: 'sessions#new'
+  # post   '/login',        to: 'sessions#create'
+  # delete '/logout',       to: 'sessions#destroy'
 
-  get    '/login',        to: 'sessions#new'
-  post   '/login',        to: 'sessions#create'
-  delete '/logout',       to: 'sessions#destroy'
 
-  root 'home#index'
+  root 'items#index'
 end

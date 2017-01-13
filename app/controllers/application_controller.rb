@@ -6,14 +6,16 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   # make this methods accessible in view
-  helper_method :current_user, :current_business
+  helper_method  :current_business
 
   # authenticate user for all controllers and all actions
   # unless specified otherwise in each controller
-  before_filter :authenticate_user
+  before_filter :authenticate_user!
 
-  # authenticate user function, redirect to login page if not logged in
-  def authenticate_user
-    redirect_to login_path, notice: "Please login first" if current_user.blank?
-  end
+  ## Nazmy 11-Jan-2017
+  # Below is no longer need after using devise
+  # # authenticate user function, redirect to login page if not logged in
+  # def authenticate_user
+  #   redirect_to login_path, notice: "Please login first" if current_user.blank?
+  # end
 end
