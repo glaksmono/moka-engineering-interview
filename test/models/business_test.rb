@@ -1,12 +1,8 @@
 require 'test_helper'
 
 class BusinessTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
-
-  def setup
-  	@business = Business.new(name: "Test business", address: "Business address Test", city: "Business City Test")
+  setup do
+    @business = businesses(:businessadminuser)
   end
 
   test "should be valid" do
