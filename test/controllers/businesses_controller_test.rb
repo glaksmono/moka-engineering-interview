@@ -17,7 +17,7 @@ class BusinessesControllerTest < ActionController::TestCase
       user: @user
     }
 
-    @businessUpdate = {
+    @business_update = {
       name: "Cafe Boss",
       address: "Address 2",
       city: "City 2",
@@ -50,6 +50,27 @@ class BusinessesControllerTest < ActionController::TestCase
     assert_redirected_to items_path
   end
 
+  test 'should fail if name is empty' do
+    login
+ 		@business.delete(:name)
+ 		post :create, business: @business
+ 		assert_response(302)
+ 	end
+
+ 	test 'should fail if address is empty' do
+    login
+ 		@business.delete(:address)
+ 		post :create, business: @business
+ 		assert_response(302)
+ 	end
+
+ 	test 'should fail if city is empty' do
+    login
+ 		@business.delete(:city)
+ 		post :create, business: @business
+ 		assert_response(302)
+ 	end
+
   test "should get edit" do
     login
     create_business
@@ -60,7 +81,7 @@ class BusinessesControllerTest < ActionController::TestCase
   test "should update business" do
     login
     create_business
-    patch :update, id: @business, business: @businessUpdate
+    patch :update, id: @business, business: @business_update
     assert_redirected_to items_path
   end
 end

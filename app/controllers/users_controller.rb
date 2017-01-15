@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate_user, :only => [:new, :create]
+  skip_before_filter :authenticate_user, :only => [:new, :create, :edit, :update]
 
   # GET /users/new
   def new
@@ -13,16 +13,20 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    if (user_params[:password] == user_params[:password_confirmation])
-      @user = User.new(user_params)
+    if User.where(:email => user_params[:email]).empty?
+      if (user_params[:password] == user_params[:password_confirmation] && user_params[:first_name] && user_params[:last_name] && user_params[:email])
+        @user = User.new(user_params)
 
-      if @user.save
-        redirect_to "/login", notice: 'User was successfully created.'
+        if @user.save
+          redirect_to "/login", notice: 'User was successfully created.'
+        else
+          render :new
+        end
       else
-        render :new
+        redirect_to "/signup", notice: 'Password don\'t match!'
       end
     else
-      redirect_to "/signup", notice: 'Password don\'t match!'
+      redirect_to "/signup", notice: 'Email already exist'
     end
   end
 

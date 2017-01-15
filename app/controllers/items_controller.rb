@@ -24,14 +24,18 @@ class ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = Item.new(item_params)
-    @item.price = item_params[:price].gsub(/\D/, '').to_i
-    @item.business_id = current_business.id
+    if (item_params[:name] && item_params[:price])
+      @item = Item.new(item_params)
+      @item.price = item_params[:price].gsub(/\D/, '').to_i
+      @item.business_id = current_business.id
 
-    if @item.save
-      redirect_to "/items", notice: 'Item was successfully created.'
+      if @item.save
+        redirect_to "/items", notice: 'Item was successfully created.'
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to new_item_url, notice: 'Name or price is required.'      
     end
   end
 

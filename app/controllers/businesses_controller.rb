@@ -1,5 +1,5 @@
 class BusinessesController < ApplicationController
-  before_action :set_business, only: [:show, :edit, :update, :destroy]
+  before_action :set_business, only: [:edit, :update]
 
   # GET /businesses/new
   def new
@@ -17,13 +17,17 @@ class BusinessesController < ApplicationController
 
   # POST /businesses
   def create
-    @business = Business.new(business_params)
-    @business.user_id = current_user.id
+    if (business_params[:name] && business_params[:city] && business_params[:address])
+      @business = Business.new(business_params)
+      @business.user_id = current_user.id
 
-    if @business.save
-      redirect_to "/items", notice: 'Business was successfully created.'
+      if @business.save
+        redirect_to "/items", notice: 'Business was successfully created.'
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to new_business_url, notice: 'Name or city or address is required.'      
     end
   end
 

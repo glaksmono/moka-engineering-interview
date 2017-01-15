@@ -10,7 +10,7 @@ class UsersControllerTest < ActionController::TestCase
    		password_confirmation:"12345678"
     }
 
-    @userUpdate = {
+    @user_update = {
       first_name: "A",
       last_name: "B",
       email: "a@b.com",
@@ -19,7 +19,7 @@ class UsersControllerTest < ActionController::TestCase
     }
   end
 
- 	def create_user
+  def create_user
     @user = User.create!(
    		first_name: "W",
    		last_name:"N", 
@@ -42,6 +42,24 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to '/login'
   end
 
+  test 'should fail if first_name is empty' do
+ 		@user.delete(:first_name)
+ 		post :create, user: @user
+ 		assert_response(302)
+ 	end
+
+ 	test 'should fail if last_name is empty' do
+ 		@user.delete(:last_name)
+ 		post :create, user: @user
+ 		assert_response(302)
+ 	end
+
+ 	test 'should fail if email is empty' do
+ 		@user.delete(:email)
+ 		post :create, user: @user
+ 		assert_response(302)
+ 	end
+
   test "should get edit" do
     create_user
     login
@@ -52,7 +70,7 @@ class UsersControllerTest < ActionController::TestCase
   test "should update user" do
     create_user
     login
-    patch :update, id: @user, user: @userUpdate
+    patch :update, id: @user, user: @user_update
     assert_redirected_to items_path
   end
 end

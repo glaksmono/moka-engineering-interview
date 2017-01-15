@@ -16,7 +16,7 @@ class ItemsControllerTest < ActionController::TestCase
       business: @business
     }
 
-    @itemUpdate = {
+    @item_update = {
       name: "Woo",
       price: "20",
       business: @business
@@ -64,6 +64,22 @@ class ItemsControllerTest < ActionController::TestCase
     assert_redirected_to items_path
   end
 
+  test 'should fail if name is empty' do
+    login
+    create_business
+ 		@item.delete(:name)
+ 		post :create, item: @item
+ 		assert_response(302)
+ 	end
+
+ 	test 'should fail if price is empty' do
+    login
+    create_business
+ 		@item.delete(:price)
+ 		post :create, item: @item
+ 		assert_response(302)
+ 	end
+
   test "should get edit" do
     login
     create_business
@@ -76,7 +92,7 @@ class ItemsControllerTest < ActionController::TestCase
     login
     create_business
     create_item
-    patch :update, id: @item, item: @itemUpdate
+    patch :update, id: @item, item: @item_update
     assert_redirected_to items_path
   end
 
