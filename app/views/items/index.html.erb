@@ -6,7 +6,7 @@
   <tr>
     <th>Item name</th>
     <th>Price</th>
-    <th><button name="add">Add</button></th>
+    <th><%= button_to 'Add', new_item_path, method: :get %></th>
   </tr>
 
   <% @items.each do |item| %>
@@ -14,8 +14,8 @@
       <td><%= item.name %></td>
       <td><%= item.price %></td>
       <td>
-        <button name="edit">Edit</button>
-        <button name="delete">Delete</button>
+        <%= button_to 'Edit', edit_item_path(item), method: :get %>
+        <%= button_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>
   <% end %>
