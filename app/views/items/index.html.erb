@@ -1,22 +1,40 @@
 <% provide(:title, "Items") %>
 
-<h1>Listing items</h1>
+<h1>Listing Items</h1>
 
-<table class="item-list">
-  <tr>
-    <th>Item name</th>
-    <th>Price</th>
-    <th><button name="add">Add</button></th>
-  </tr>
+<div class="table-responsive">
+  <table class="table table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Price</th>
+        <th class="text-right"><%= link_to 'Add', new_item_path, class: "btn btn-primary btn-sm" %></th>
+      </tr>
+    </thead>
 
-  <% @items.each do |item| %>
-    <tr>
-      <td><%= item.name %></td>
-      <td><%= item.price %></td>
-      <td>
-        <button name="edit">Edit</button>
-        <button name="delete">Delete</button>
-      </td>
-    </tr>
-  <% end %>
-</table>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= item.price %></td>
+          <td class="text-right">
+            <%= link_to 'Edit', edit_item_path(item), class: "btn btn-warning btn-sm" %>
+            <%= link_to 'Delete', item, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <% unless @items.present? %>
+      <tr>
+        <td colspan="999" class="text-center">No Items Found</td>
+      </tr>
+      <% end %>
+    </tfoot>
+  </table>
+</div>
+
+<div class="text-center">
+  <%= link_to 'Back to Dashboard', current_user %>
+</div>

@@ -1,0 +1,42 @@
+<% provide(:title, 'Dashboard') %>
+<div class="col-md-offset-3 col-md-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">User Profile</h3>
+    </div>
+    <div class="panel-body form">
+      <div class="form-group">
+        <div><strong>First Name:</strong></div>
+        <div><%= current_user.first_name %></div>
+      </div>
+      <div class="form-group">
+        <div><strong>Last Name:</strong></div>
+        <div><%= current_user.last_name %></div>
+      </div>
+      <div class="form-group">
+        <div><strong>Email:</strong></div>
+        <div><%= current_user.email %></div>
+      </div>
+      <div class="form-group">
+        <div><strong>Business:</strong></div>
+        <div class="well">
+          <% if current_business %>
+            <address>
+              <div class="form-group">
+                <%= link_to current_business.name, items_path %>
+                <div class="input-group pull-right">
+                  <%= link_to '', edit_business_path(current_business), class: "btn btn-xs btn-warning glyphicon glyphicon-pencil" %>&nbsp;
+                  <%= link_to '', current_business, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger glyphicon glyphicon-remove" %>
+                </div>
+              </div>
+              <p><%= current_business.address %></p>
+              <div><%= current_business.city %></div>
+            </address>
+          <% else %>
+            <div>You don't have any business yet. Please create new Business now!.</div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
