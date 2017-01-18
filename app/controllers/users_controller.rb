@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def new
     # TODO: [MOKA-002] Finish the implementation of User registration
+    redirect_to current_user if current_user
     @user = User.new
   end
 
