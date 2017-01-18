@@ -24,5 +24,17 @@
         </tr>
       <% end %>
     </tbody>
+
+    <tfoot>
+      <% unless @items.present? %>
+      <tr>
+        <td colspan="999" class="text-center">No Items Found</td>
+      </tr>
+      <% end %>
+    </tfoot>
   </table>
+</div>
+
+<div class="text-center">
+  <%= link_to 'Back to Dashboard', current_user %>
 </div>

@@ -4,7 +4,9 @@
     <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
         <ul>
+          <% unless current_business %>
           <li><%= link_to "Create Business", new_business_path %></li>
+          <% end %>
           <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
           <li class="divider"></li>
           <li>

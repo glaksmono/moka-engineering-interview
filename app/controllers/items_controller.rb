@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
       @items = current_business.items
     else
     # If business not yet created, redirect to create a new business
-      redirect_to new_business_path, notice: "Please create a business."
+      redirect_to current_user
     end
   end
 
@@ -52,6 +52,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :price, :business_id)
+    params.require(:item).permit(:name, :price)
   end
 end
