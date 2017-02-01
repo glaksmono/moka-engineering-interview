@@ -119,8 +119,8 @@ $(document).ready(function(){
         <td> '+ data.name +' </td>\
         <td>' + data.price +'</td>\
         <td>\
-          <button name="edit">Edit</button>\
-          <button name="delete">Delete</button>\
+          <button name="edit" data-id='+data.id+'>Edit</button>\
+          <button name="delete" data-id='+data.id+'>Delete</button>\
         </td>\
       </tr>'
     $('.item-list > tbody > tr:first').after(s_table)
