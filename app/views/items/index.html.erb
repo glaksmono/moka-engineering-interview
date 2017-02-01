@@ -2,21 +2,37 @@
 
 <h1>Listing items</h1>
 
-<table class="item-list">
-  <tr>
-    <th>Item name</th>
-    <th>Price</th>
-    <th><button name="add">Add</button></th>
-  </tr>
+<div class="col-md-6">
 
-  <% @items.each do |item| %>
+  <table class="item-list">
     <tr>
-      <td><%= item.name %></td>
-      <td><%= item.price %></td>
-      <td>
-        <button name="edit">Edit</button>
-        <button name="delete">Delete</button>
-      </td>
+      <th>Item name</th>
+      <th>Price</th>
+      <th><button name="add">Add</button></th>
     </tr>
+
+    <% @items.each do |item| %>
+      <tr data-id=<%= item.id%>>
+        <td><%= item.name %></td>
+        <td><%= item.price %></td>
+        <td>
+          <button name="edit" data-id=<%= item.id%>>Edit</button>
+          <button name="delete" data-id=<%= item.id%>>Delete</button>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="col-md-6" id="inputItem">
+  <%= form_for(@item, remote: true) do |f| %>
+    <div class="field_with_errors form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="field_with_errors form-group">
+      <%= f.label :price %>
+      <%= f.text_field :price, class: "form-control" %>
+    </div>
+    <%= f.submit "Create" %>
   <% end %>
-</table>
+</div>
