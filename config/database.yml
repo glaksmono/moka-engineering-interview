@@ -2,8 +2,8 @@ development: &local
   adapter: postgresql
   database: mokatest
   host: localhost
-  username: postgres
-  password: 12345678
+  username: shail3sh
+  password:
   port: 5432
   pool: 5
   timeout: 5000

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.8'
 
 # SCSS
 gem 'sass-rails', '5.0.4'
@@ -16,6 +16,8 @@ gem 'jquery-rails', '3.0.4'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.1.2'
+
+gem 'json', '1.8.5'
 
 group :development, :test do
   # Debugger
