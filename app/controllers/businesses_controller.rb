@@ -1,4 +1,6 @@
 class BusinessesController < ApplicationController
+  before_action :set_business, only: [:edit, :update]
+
   def index
   end
 
@@ -13,7 +15,7 @@ class BusinessesController < ApplicationController
   end
 
   def create
-    @business = Business.new(business_params)
+    @business = Business.new(business_params(params))
     @business.user = current_user
 
     if @business.save
@@ -25,12 +27,22 @@ class BusinessesController < ApplicationController
   end
 
   def update
-  end
+    if @business.update_attributes(business_params(params))
+      redirect_to "/", notice: "Business has been updated."
+    else
+      render "edit"
+    end
+end
 
   def delete
   end
 
-  def business_params
-    params.require(:business).permit(:name, :address, :city)
-  end
+  private
+    def set_business
+      @business = Business.find(params[:id])
+    end
+
+    def business_params(params)
+      params.require(:business).permit(:name, :address, :city)
+    end
 end
