@@ -16,7 +16,13 @@ ActiveRecord::Schema.define(version: 20161215102045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "businesses", force: :cascade do |t|
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "businesses", id: :bigserial, force: :cascade do |t|
     t.string   "name"
     t.text     "address"
     t.string   "city"
@@ -27,7 +33,7 @@ ActiveRecord::Schema.define(version: 20161215102045) do
 
   add_index "businesses", ["user_id"], name: "index_businesses_on_user_id", using: :btree
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", id: :bigserial, force: :cascade do |t|
     t.string   "name"
     t.integer  "price",       limit: 8
     t.integer  "business_id"
@@ -37,7 +43,7 @@ ActiveRecord::Schema.define(version: 20161215102045) do
 
   add_index "items", ["business_id"], name: "index_items_on_business_id", using: :btree
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :bigserial, force: :cascade do |t|
     t.text     "email"
     t.text     "password_digest"
     t.string   "first_name"
