@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :authenticate_user, :only => [:new, :create]
+  before_action :set_user, only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])
@@ -9,8 +10,11 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def edit
+  end
+
   def create
-    @user = User.new(params)
+    @user = User.new(user_params(params))
 
     if @user.save
       redirect_to "/", notice: 'Sign Up was successful!! Please login to continue...'
@@ -20,7 +24,20 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_params
-    params.require(:user).permit(:email, :password_digest, :first_name, :last_name)
+  def update
+    if @user.update_attributes(user_params(params))
+      redirect_to "/", notice: "Profile has been updated."
+    else
+      render "edit"
+    end
   end
+
+  private
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params(params)
+      params.require(:user).permit(:email, :current_password, :password, :password_digest, :first_name, :last_name)
+    end
 end

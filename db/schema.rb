@@ -53,5 +53,4 @@ ActiveRecord::Schema.define(version: 20161215102045) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
-
 end

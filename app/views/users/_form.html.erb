@@ -1,0 +1,42 @@
+<%= form_for user, url: {action: method} do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "invalid value") %>.</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name, class: 'form-control' %>
+
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name, class: 'form-control' %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <% if method == "update" %>
+    <%= f.label :current_password %>
+    <%= f.password_field :current_password, class: 'form-control' %>
+  <% end %>
+
+  <% if method == "update" %>
+    <%= f.label :new_password %>
+  <% else %>
+    <%= f.label :password %>
+  <% end %>
+  <%= f.password_field :password, class: 'form-control' %>
+
+  <%= f.label :password_confirmation, "Confirm Password" %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+  <% if method == "create" %>
+    <%= f.submit "Create my account", class: "btn btn-primary" %>
+  <% else %>
+    <%= f.submit "Update my profile", class: "btn btn-primary" %>
+  <% end %>
+<% end %>
