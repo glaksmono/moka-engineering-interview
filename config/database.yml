@@ -1,6 +1,6 @@
 development: &local
   adapter: postgresql
-  database: mokatest
+  database: mokadev
   host: localhost
   username: shail3sh
   password:
@@ -20,7 +20,7 @@ test:
 
 production:
   adapter: postgresql
-  database: mokatest
+  database: mokaprod
   host: localhost
   username: postgres
   password: 12345678
