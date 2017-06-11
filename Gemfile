@@ -18,6 +18,7 @@ gem 'jquery-rails', '3.0.4'
 gem 'bcrypt-ruby', '3.1.2'
 
 gem 'json', '1.8.5'
+gem 'validates_email_format_of'
 
 group :development, :test do
   # Debugger
@@ -25,6 +26,7 @@ group :development, :test do
   gem 'pry-nav', '0.2.4'
   gem 'pry-rails', '0.3.3'
   gem 'pry-rescue', '1.4.2'
+  gem "rspec-rails"
 end
 
 group :development do

@@ -8,12 +8,13 @@ class User < ActiveRecord::Base
   validates :first_name,  presence: true
   validates :last_name,  presence: true
   validates :email, presence: true
+  validates_email_format_of :email, :message => 'format is invalid.'
+  validates :password, length: { minimum: 6 }, allow_nil: true
+  validate :validates_current_password
 
   def full_name
     (first_name || "") + " " + (last_name || "")
   end
-
-  validate :validates_current_password
 
   private
     def validates_current_password
