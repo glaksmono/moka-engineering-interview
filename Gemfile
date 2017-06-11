@@ -26,7 +26,9 @@ group :development, :test do
   gem 'pry-nav', '0.2.4'
   gem 'pry-rails', '0.3.3'
   gem 'pry-rescue', '1.4.2'
+  gem 'database_cleaner'
   gem "rspec-rails"
+  gem "factory_girl_rails"
 end
 
 group :development do
@@ -35,4 +37,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
 end
