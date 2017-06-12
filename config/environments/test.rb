@@ -40,9 +40,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Enable stdout logger
-  config.logger = Logger.new(STDOUT)
-
   # Set log level
   config.log_level = :DEBUG
+
+  config.action_controller.default_url_options = { host: 'http://localhost:3000' }
 end
