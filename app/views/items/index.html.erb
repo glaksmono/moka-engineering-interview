@@ -1,12 +1,12 @@
 <% provide(:title, "Items") %>
-
-<h1>Listing items</h1>
+<div class="business-name"><%= current_business.name %></div>
+<h2>Listing items</h2>
 
 <table class="item-list">
   <tr>
     <th>Item name</th>
     <th>Price</th>
-    <th><button name="add">Add</button></th>
+    <th><a href="/items/new" class="add-button">Add</a></th>
   </tr>
 
   <% @items.each do |item| %>
@@ -14,8 +14,8 @@
       <td><%= item.name %></td>
       <td><%= item.price %></td>
       <td>
-        <button name="edit">Edit</button>
-        <button name="delete">Delete</button>
+        <a href="/items/<%= item.id %>/edit" class="btn btn-default btn-sm">Edit</a>
+        <a href="/items/<%= item.id %>" data-method="delete" data-confirm="Are you sure?" class="btn btn-danger btn-sm">Delete</a>
       </td>
     </tr>
   <% end %>

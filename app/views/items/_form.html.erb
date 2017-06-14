@@ -1,0 +1,24 @@
+<%= form_for item, url: {action: method} do |f| %>
+  <% if item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(item.errors.count, "invalid value") %>.</h2>
+
+      <ul>
+      <% item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :price %>
+  <%= f.text_field :price, class: 'form-control' %>
+
+  <% if method == "create" %>
+    <%= f.submit "Create my item", class: "btn btn-primary" %>
+  <% else %>
+    <%= f.submit "Update my item", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

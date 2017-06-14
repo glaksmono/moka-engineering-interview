@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.8'
 
 # SCSS
 gem 'sass-rails', '5.0.4'
@@ -17,12 +17,20 @@ gem 'jquery-rails', '3.0.4'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '3.1.2'
 
+gem 'json', '1.8.5'
+gem 'validates_email_format_of'
+gem 'capybara'
+gem 'devise'
+
 group :development, :test do
   # Debugger
   gem 'byebug', '3.5.1'
   gem 'pry-nav', '0.2.4'
   gem 'pry-rails', '0.3.3'
   gem 'pry-rescue', '1.4.2'
+  gem 'database_cleaner'
+  gem "rspec-rails"
+  gem "factory_girl_rails"
 end
 
 group :development do
@@ -31,4 +39,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
 end

@@ -1,0 +1,28 @@
+<%= form_for business, url: {action: method} do |f| %>
+  <% if business.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(business.errors.count, "invalid value") %>.</h2>
+
+      <ul>
+      <% business.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address, class: 'form-control' %>
+
+  <%= f.label :city %>
+  <%= f.text_field :city, class: 'form-control' %>
+
+  <% if method == "create" %>
+    <%= f.submit "Create my business", class: "btn btn-primary" %>
+  <% else %>
+    <%= f.submit "Update my business", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

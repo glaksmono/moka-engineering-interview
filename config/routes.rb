@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :users
+  # Devise
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
   resources :items
-  resources :business
-
-  get    '/signup',       to: 'users#new'
-
-  get    '/login',        to: 'sessions#new'
-  post   '/login',        to: 'sessions#create'
-  delete '/logout',       to: 'sessions#destroy'
+  resources :businesses
 
   root 'home#index'
 end

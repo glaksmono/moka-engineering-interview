@@ -1,18 +1,26 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
-  <a href="/"><h2 class="header-main">Moka Rails Interview</h1></a>
+  <a href="/">
+    <h2 class="header-main">
+      Moka
+      <span class="username">
+        <% if current_user %>
+          (<%= current_user.full_name %>)
+        <% end %>
+      </span>
+    </h2>
+  </a>
   <nav>
     <ul class="nav navbar-nav navbar-right">
       <% if current_user %>
         <ul>
-          <li><%= link_to "Create Business", new_business_path %></li>
-          <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+          <li><%= link_to "Edit Profile", edit_user_registration_path(current_user) %></li>
           <li class="divider"></li>
           <li>
-            <%= link_to "Log out", logout_path, method: "delete" %>
+            <%= link_to "Log out", destroy_user_session_path, method: "delete" %>
           </li>
         </ul>
       <% else %>
-        <li><%= link_to "Log in", login_path %></li>
+        <li><%= link_to "Log in", new_user_session_path %></li>
       <% end %>
     </ul>
   </nav>

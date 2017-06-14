@@ -1,0 +1,8 @@
+<% provide(:title, 'Create a new business') %>
+<h1 class="text-center">Create A New Business</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3" id="signup-form">
+    <%= render 'form', business: @business, method: "create" %>
+    <div class="text-center"><a href="/" class="btn btn-default">Cancel</a></div>
+  </div>
+</div>
