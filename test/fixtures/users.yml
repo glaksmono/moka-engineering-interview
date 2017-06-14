@@ -10,20 +10,20 @@ good:
   first_name: 'John'
   last_name: 'Elton'
   email: 'john@example.com'
-  password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
+  # password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
 
 first_name_missing:
   last_name: 'Elton'
   email: 'john@example.com'
-  password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
+  # password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
 
 last_name_missing:
   first_name: 'John'
   email: 'john@example.com'
-  password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
+  # password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
 
 email_missing:
   first_name: 'John'
   last_name: 'Elton'
-  password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
+  # password_digest: <%= BCrypt::Password.create('abcd1234', cost: 4) %>
 

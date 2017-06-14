@@ -20,6 +20,7 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'json', '1.8.5'
 gem 'validates_email_format_of'
 gem 'capybara'
+gem 'devise'
 
 group :development, :test do
   # Debugger

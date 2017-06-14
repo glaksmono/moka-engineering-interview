@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+
   resources :items
   resources :businesses
 
