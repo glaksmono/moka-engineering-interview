@@ -29,21 +29,21 @@ describe User do
     expect(build(:user).full_name).to eq("Jack Sparrow")
   end
 
-  it 'validates correct current_password' do
-    user = create(:user)
-    user.current_password = "jackal123"
-    user.password = "new_password"
-    user.password_confirmation = "new_password"
+  # it 'validates correct current_password' do
+  #   user = create(:user)
+  #   user.current_password = "jackal123"
+  #   user.password = "new_password"
+  #   user.password_confirmation = "new_password"
 
-    expect(user).to be_valid
-  end
+  #   expect(user).to be_valid
+  # end
 
-  it 'is invalid with incorrect current_password' do
-    user = create(:user)
-    user.current_password = "something"
-    user.password = "new_password"
-    user.password_confirmation = "new_password"
+  # it 'is invalid with incorrect current_password' do
+  #   user = create(:user)
+  #   user.current_password = "something"
+  #   user.password = "new_password"
+  #   user.password_confirmation = "new_password"
 
-    expect(user).to_not be_valid
-  end
+  #   expect(user).to_not be_valid
+  # end
 end

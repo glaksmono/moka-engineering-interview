@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :business
+  attr_accessor :current_password
 
   validates :first_name,  presence: true
   validates :last_name,  presence: true
